@@ -6,6 +6,11 @@ Projeto para auxiliar a Nayara
 git clone https://github.com/GravetoGeek/uploadimage.git
 ```
 
+## Instale as dependências
+```
+npm install
+```
+
 ## Execute o comando
 
 ```
