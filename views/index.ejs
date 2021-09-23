@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form onsubmit="send()" id="form" method="post">
+    <label for="treatment">Tratamento</label>
+    <input type="text" name="treatment" id="treatment">
+    <label for="code">Código</label>
+    <input type="text" name="code" id="code">
+    <label for="rate">Rate</label>
+    <input type="text" name="rate" id="rate">
+    <label for="photo">Foto</label>
+    <input type="file" name="photo" id="photo" onchange="">
+    <input type="submit" value="send">
+  </form>
+  <img id="photoview" class="image-fluid" src="#" alt="">
+  <ul>
+
+  </ul>
+  <script>
+    const send = async ()=>{
+      event.preventDefault()
+      let treatment = document.getElementById('treatment').value
+      let code = document.getElementById('code').value
+      let rate = document.getElementById('rate').value
+      let photo = document.getElementById('photo')
+      let photoview = document.getElementById('photoview')
+      let formData = new FormData()
+      formData.append('photo',photo.files[0])
+      formData.append('treatment',treatment)
+      formData.append('code',code)
+      formData.append('rate',rate)
+
+
+      const data = await fetch('/salvar',
+      {
+        method:'post',
+        mode: 'cors',
+        body: formData,
+      })
+      .then((res)=>res.json())
+      .then(res =>{
+        photoview.src = res.photo_url
+      })
+      console.log(data)
+
+
+    }
+  </script>
+</body>
+</html>
